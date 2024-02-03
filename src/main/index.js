@@ -7,7 +7,6 @@ root.render(
       <App />
 );
 
-// For auto injecting without reload - don't remove
 if(module.hot){
     module.hot.accept();
 }

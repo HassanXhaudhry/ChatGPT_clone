@@ -9,13 +9,26 @@
 .app {
   text-align: center;
   display: flex;
-  position: absolute;
   top: 0px;
   right: 0px;
   bottom: 0px;
   left: 0px;
+  height: 100vh;
 }
-
+.icon-div {
+  position: fixed;
+  left: 15px;
+  top: 15px;
+  display: flex;
+  flex-direction: row;
+  color: #84888f;
+  gap: 18px;
+  margin-bottom: 10px;
+}
+.icon{
+  font-size: 28px;
+  cursor: pointer;
+}
 .chatbox {
   color: #fff;
   background-color: #343541;
@@ -27,11 +40,7 @@
   overflow-x: hidden!important;
   align-items: center;
 }
-.blur {
-  backdrop-blur: 3px;
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
-}
+
 .chat-input {
   position: sticky;
   bottom: 1px;
@@ -49,9 +58,6 @@
   text-align: center;
   justify-content: center;
 }
-form{
-  width: 100%;
-}
 .chat-input-box {
   width: 100%;
   font-size: 16px;
@@ -62,39 +68,9 @@ form{
   border: none;
   color: #fff;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  transition: background-color 0.3s ease;
 }
 
-.side-menu {
-  user-select: none;
-  padding: 8px;
-  width: 245px;
-  color: #fff;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  background-color: #202123;
-}
-.side-menu-bottom{
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-.side-menu-bottom > div{
-  border: none;
-}
-.side-menu-bottom >a > div{
-  border: none;
-}
-a{
-  text-decoration: none;
-  color: #fff;
-}
-.side-menu-bottom > a> div > span{
-  position: relative;
-  padding-right: 20px;
-  top: 3px;
-}
 .chat-input-icon {
   position: relative;
   top: 16px;
@@ -108,18 +84,70 @@ a{
   top: 12px;
   rotate: 40deg;
 }
-.side-menu-newChat {
-  align-content: center;
-  border: 0.5px solid rgb(77, 77, 77);
-  border-radius: 6px;
-  font-size: 0.875rem;
-  padding-left: 20px;
-  text-align: left;
-  display: flex;
-  padding: 0.75rem;
-  padding-left: 1.2rem;
-  align-items: center;
+
+
+
+.bottom-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    transition: background-color 0.3s ease;
 }
+.input-div{
+  position: relative;
+    width: 100%;
+    max-width: 650px;
+    border: 1px solid #84888f;
+    border-radius: 11px;
+    padding-top: 18px;
+}
+
+.bottom-section form {
+  display: flex;
+  align-items: center;
+  width: 100%; 
+  max-width: 650px; 
+  margin-bottom: 10px;
+}
+
+.input-container {
+  border: none;
+    background-color: #343541;
+    width: 90%;
+    padding-left: 10px;
+    font-size: 14px;
+    padding-bottom: 20px;
+    border-radius: 10px;
+}
+.input-container:focus{
+ outline: none;
+}
+.submit-button {
+  font-size: 20px;
+  float: right;
+  color: #84888f;
+  display: flex;
+  align-items: center;
+  padding-bottom: 20px;
+  cursor: pointer;
+  margin-left: 10px;
+
+}
+.input-div, .submit-button{
+    right: 0;
+    bottom: 15px;
+} 
+.submit-button:disabled {
+  cursor: not-allowed;
+}
+
+
+
 .plus {
   position: relative;
   top: -3px;
@@ -127,11 +155,7 @@ a{
   font-weight: 600;
   padding-right: 9px;
 }
-.side-menu-newChat:hover {
-  cursor: pointer;
-  transition: 0.25s all;
-  background-color: #333639;
-}
+
 
 .chat-about {
   color: #adacac;
@@ -140,48 +164,67 @@ a{
   padding-bottom: 5px;
   letter-spacing: 0.1px;
 }
-.start-converstion{
-  padding-top: 20px;
+.start-conversation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  align-content: center;
-  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;
-  color: #84888f;
-  user-select: none;
+  position: absolute;
+  top: 15%;
 }
-.start-converstion .sub-text{
+
+.chatgpt-icon {
+  width: 45px;
+  height: 45px;
+  margin-left: 40px;
+  transform: translate(-50%, -50%);
+  border-radius: 60%;
+  border: 1px solid #84888f;
+}
+
+.sub-text {
   font-size: 20px;
-  font-weight: normal;
-  letter-spacing: 1px;
+  font-weight: 600;
+  font-weight: bold;
+  transition: color 0.3s ease;
+  margin-bottom: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
+
 .chat-log {
-  text-align: left;
+  display: flex;
+  flex-direction: column;
   width: 100%;
+  max-width: 600px;
+  height: auto;
+  margin-top: 4%;
 }
 .chat-message{
-  border-bottom: 1px solid rgba(128, 128, 128, 0.2);
-}
-.chat-message:nth-child(even){
-    background-color: #444654;
-}
-.chat-message-center {
   display: flex;
-  margin: 0 auto;
-  max-width: 800px;
-  padding: 24px;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+  margin-right: 10px;
+  padding: 10px;
 }
-
 .message {
-  padding-left: 30px;
-  padding-right: 40px;
-  line-height: 25px;
+  max-width: 100%;
+  box-sizing: border-box; 
+  word-wrap: break-word;
+}
+.avatar {
+  margin-top: 5px;
+  font-size: 20px;
+  margin-right: 10px;
 }
 
-.avatar {
-    background-color: rgb(16, 163, 127);
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
+
+.chat-message:nth-child(even){
+  background-color: #444654;
 }
+
+
 .chatGPT{
     border-radius: 2px;
     padding: 3px!important;
@@ -201,4 +244,92 @@ a{
 .bg-white .chat-message:nth-child(even){
   color: #18181a;
   background-color: #f7f7f8!important;
+}
+
+.questions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-auto-flow: row;
+  width: 50%; 
+  margin-top: 320px;
+  position: relative;
+  max-width: 1200px;
+  grid-gap: 12px;
+}
+
+.first-questions-column,
+.second-questions-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.answerScreen {
+  width: 100%; 
+  max-width: 300px;
+  height: 50px;
+  background-color: #40414f;
+  border-radius: 10px;
+  border: 1px solid #84888f;
+  text-align: start;
+  padding-left: 15px;
+  padding-top: 10px;
+  font-size: 13px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  font-weight: bold;
+}
+.answerScreen p{
+  padding-top: 10px;
+}
+.questions span:hover {
+  background-color: #a4a4a4a0;
+}
+
+.first-questions-column p,
+.second-questions-column p {
+  color: #84888f;
+  font-size: 12px;
+  font-weight: normal;
+}
+
+
+@media screen and (max-width: 600px)  {
+
+  .questions {
+      grid-template-columns: 1fr;
+      width: 90%;
+  }
+  .bottom-section{
+    width: 95%;
+    margin-top: 60px;
+  }
+  .input-container{
+    width: 80%;
+    margin-right: 10px !important;
+  }
+  .submit-button{
+    margin-left: 5px;
+  }
+}
+@media screen and (max-width: 1024px){
+  .bottom-section{
+    width: 95%;
+    margin-top: 60px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .first-questions-column {
+      display: none; 
+  }
+  .chat-log {
+    margin-top: 10%; 
+  }
+}
+@media only screen and (max-width: 600px) {
+  .chat-log {
+    margin-top: 17%; 
+  }
 }
