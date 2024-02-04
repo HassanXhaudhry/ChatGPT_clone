@@ -67,12 +67,10 @@ const App = () => {
   return (
     <Fragment> 
     <div className='app'>
-    <div className='icon-div'>
-            <span className='icon'  onClick={()=>{handleModeCombined()}}>
-                {icon}
-            </span>
-         </div>
       <section className={`chatbox ${mode === 'dark' ? 'bg-dark' : 'bg-white'}`} >
+      <div className='icon-div'  onClick={()=>{handleModeCombined()}}>
+        {icon}
+      </div>
       {chatLog.length > 0 ?
         chatLog.map((el, i) => {
           return <ChatMessage key={i} message={el} mode={mode} />
@@ -120,10 +118,11 @@ const ChatMessage = ({ message, mode }) => {
   
   return (
     <div className="chat-log">
+    <span className="avatar"><FaRegUser /> </span> 
       <div
         className={`chat-message ${mode === "dark" ? "bg-dark" : "bg-white"}`}
       >
-      <span className="avatar"><FaRegUser /> </span> 
+      
         <div className="message">
         {message.message}</div>
         

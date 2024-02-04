@@ -45,7 +45,7 @@ module.exports = {
                     }
                 }
             },
-            // for all asset resources
+            // for all assets resources
             {
                 test: /\.(jpg|png|gif|ttf|otf|woff|mp3|wav|mp4|webm|pdf|doc|xls|json|csv)/,
                 loader: 'file-loader',
