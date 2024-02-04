@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from 'react'
+import { HashRouter as Router } from 'react-router-dom';
 import "../styles/main.css"
 import "../styles/normalize.css"
 import gpticon from '../assets/chatgpt-icon.png';
@@ -141,5 +142,6 @@ const ChatMessage = ({ message, mode }) => {
   </div>
 */}
     </div>
+    
   );
 }
