@@ -21,7 +21,7 @@ const App = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    setLoading(false);
     setChatLog([...chatLog, { user: "me", message: input }]);
     setInput("");
     const response = await fetch('http://localhost:8080/', {
