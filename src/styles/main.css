@@ -299,6 +299,7 @@
   .bottom-section{
     width: 95%;
     margin-top: 20px;
+    margin-bottom: 30px;
   }
   .input-container{
     width: 80%;
@@ -307,31 +308,37 @@
   .submit-button{
     margin-left: 5px;
   }
+  .chat-message{
+    margin-bottom: 25px;
+  }
 }
 @media screen and (max-width: 1024px){
   .bottom-section{
     width: 95%;
-    margin-top: 60px;
   }
 }
 @media only screen and (max-width: 767px) {
   .second-questions-column {
       display: none; 
   }
+  .first-questions-column{
+    margin-top: 20px;
+  }
   .chat-log {
     margin-top: 10%; 
   }
   .bottom-section{
     width: 95%;
-    margin-top: 10px;
   }
+  
 }
 @media  screen and (max-width: 600px) {
   .chat-log {
     margin-top: 18%; 
+    margin-bottom: 10px;
   }
   .bottom-section{
     width: 95%;
-    margin-top: 5px;
   }
+  
 }
