@@ -29,7 +29,6 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     overflow-y: scroll;
     overflow-x: hidden !important;
     align-items: center;
@@ -80,59 +79,69 @@
   rotate: 40deg;
 }
 
-
+.bottom-section-container {
+  width: 100%;
+  height: 85px;
+  background-color: #84888f;
+  bottom: 0;
+  position: fixed;
+}
 
 .bottom-section {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 20px;
-    margin-top: 50px;
-    margin-bottom: 30px;
-    transition: background-color 0.3s ease;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 98px;
+  transition: background-color 0.3s ease;
+  z-index: 10;
 }
-.input-div{
+
+
+.input-div {
   position: relative;
-    width: 100%;
-    max-width: 650px;
-    border: 1px solid #84888f;
-    border-radius: 11px;
-    padding-top: 18px;
+  width: 100%;
+  max-width: 650px;
+  border: 1px solid #84888f;
+  border-radius: 15px;
+  padding-top: 18px;
 }
 
 .bottom-section form {
   display: flex;
   align-items: center;
-  width: 100%; 
-  max-width: 650px; 
+  width: 100%;
+  max-width: 650px;
   margin-bottom: 10px;
+  border: 1px solid #84888f;
 }
 
 .input-container {
   border: none;
-    background-color: #343541;
-    width: 90%;
-    padding-left: 10px;
-    font-size: 14px;
-    padding-bottom: 20px;
-    border-radius: 10px;
+  background-color: #343541;
+  width: 90%;
+  padding-left: 10px;
+  font-size: 14px;
+  padding-bottom: 20px;
+  border-radius: 18px;
 }
+
 .input-container:focus{
  outline: none;
 }
 .submit-button {
+  position: relative;
   font-size: 20px;
-  float: right;
   color: #84888f;
   display: flex;
-  align-items: center;
-  padding-bottom: 20px;
   cursor: pointer;
-  margin-left: 10px;
-
+  padding-top: 12px;
 }
+
 .input-div, .submit-button{
     right: 0;
     bottom: 15px;
@@ -192,7 +201,7 @@
   width: 100%;
   max-width: 600px;
   height: auto;
-  margin-top: 3%;
+  margin-top: 4%;
 }
 
 .message {
@@ -299,8 +308,7 @@
   }
   .bottom-section{
     width: 95%;
-    margin-top: 35px;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
   }
   .input-container{
     width: 80%;
@@ -311,6 +319,7 @@
   }
   .chat-message{
     margin-bottom: 25px;
+    margin-right: 2%;
   }
 }
 @media screen and (max-width: 1024px){
@@ -326,7 +335,7 @@
     margin-top: 20px;
   }
   .chat-log {
-    margin-top: 10%; 
+    margin-top: 12%; 
   }
   .bottom-section{
     width: 95%;
@@ -335,7 +344,7 @@
 }
 @media  screen and (max-width: 600px) {
   .chat-log {
-    margin-top: 18%; 
+    margin-top: 20%; 
     margin-bottom: 10px;
   }
   .bottom-section{

@@ -101,6 +101,7 @@ const App = () => {
         </div>
     </div>
   )}
+  <div className={`bottom-section-container ${mode === 'dark' ? 'bg-dark' : 'bg-white'}`}>
         <div className='bottom-section'>
             <form className='input-div' onSubmit={handleCombinedSubmit}>
               <input
@@ -112,10 +113,9 @@ const App = () => {
                 onChange={(e) =>  {setPromptText(e.target.value)} }
               />
               <div className='submit-button' onClick={handleCombinedSubmit}><FontAwesomeIcon icon={faArrowUp} /></div>
-
-              </form>
-              
+            </form>
         </div>
+    </div>    
       </section>
     </div>
     </Fragment>
@@ -133,7 +133,7 @@ const ChatMessage = ({ message, mode }) => {
         )}
       </div>
       <div className="message">
-        {message.user !== 'chatgpt' && <FaRegUser />} &nbsp; &nbsp; &nbsp; {message.message} 
+        {message.user !== 'chatgpt' && <FaRegUser />} &nbsp; &nbsp; {message.message} 
       </div>
     </div>
   );
