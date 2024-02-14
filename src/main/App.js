@@ -126,15 +126,16 @@ export default App
 const ChatMessage = ({ message, mode }) => {
   return (
     <div className={`chat-log ${mode === "dark" ? "bg-dark" : "bg-white"}`}>
-      <span className="avatar"></span> 
+      <span className="avatar"></span>
       <div className={message.user === 'chatgpt' ? 'chatGPT' : ''}>
         {message.user === 'chatgpt' && (
           <img className='gpt-icon-answer' src={gpticon} alt="User" />
         )}
       </div>
-      <div className="message">
-        {message.user !== 'chatgpt' && <FaRegUser />} &nbsp; &nbsp; {message.message} 
+      <div className="user-icon">
+        {message.user !== 'chatgpt' && <span><FaRegUser /></span>} &nbsp; &nbsp;
       </div>
+      <div className="message">{message.message}</div>
     </div>
   );
 };

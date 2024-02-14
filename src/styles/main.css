@@ -195,19 +195,16 @@
   margin-left: 5px;
   margin-right: 5px;
 }
-
+.user-icon{
+  margin-left: 5px;
+}
 .chat-log {
   display: flex;
   width: 100%;
   max-width: 600px;
-  height: auto;
-  margin-top: 4%;
+  margin-top: 3%;
 }
-
-.message {
-  display: flex;
-  text-align: start;
-  max-width: 100%;
+.message{
 }
 .avatar {
   margin-top: 5px;
@@ -252,7 +249,7 @@
   margin-top: 320px;
   position: relative;
   max-width: 1200px;
-  grid-gap: 12px;
+  grid-gap: 20px;
 }
 
 .first-questions-column,
@@ -321,12 +318,16 @@
     margin-right: 2%;
   }
 }
-@media screen and (max-width: 1024px){
+@media screen and (max-width: 1040px){
   .bottom-section{
     width: 95%;
   }
+  .questions{
+    margin-top: 200px;
+  }
 }
 @media only screen and (max-width: 767px) {
+  
   .second-questions-column {
       display: none; 
   }
@@ -339,7 +340,9 @@
   .bottom-section{
     width: 95%;
   }
-  
+  .questions{
+    margin-top: 300px;
+  }
 }
 @media  screen and (max-width: 600px) {
   .chat-log {
@@ -349,5 +352,6 @@
   .bottom-section{
     width: 95%;
   }
+  
   
 }
