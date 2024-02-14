@@ -1,11 +1,9 @@
 import React, { Fragment, useState } from 'react'
-import { HashRouter as Router } from 'react-router-dom';
 import "../styles/main.css"
 import "../styles/normalize.css"
 import gpticon from '../assets/chatgpt-icon.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons'
-import userImage from '../assets/userpng.png';
 import { FiMoon } from "react-icons/fi";
 import { MdOutlineWbSunny } from "react-icons/md";
 import { FaRegUser } from "react-icons/fa6";
@@ -13,36 +11,47 @@ import { FaRegUser } from "react-icons/fa6";
 
 const App = () => {
 
-  const [input, setInput] = useState("");
-  const [chatLog, setChatLog] = useState([]);
   const [mode, setMode] = useState('white');
-  const [loading, setLoading] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
-  const [icon, setIcon]= useState(FiMoon)
+  const [icon, setIcon]= useState(FiMoon);
+
+  const [promptText, setPromptText] = useState('');
+  const [response, setResponse] = useState([]);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(false);
-    setChatLog([...chatLog, { user: "me", message: input }]);
-    setInput("");
-    const response = await fetch('http://localhost:8080/', {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        message: input
-      })
-    })
-    const data = await response.json();
-    console.log(data);
-    setChatLog(prev => [...prev, { user: "chatgpt", message: data.message.choices[0].text }]);
-    setLoading(false);
+    setLoading(true);
+    setResponse([...response, { user: "me", message: promptText }]);
+    setPromptText("");
+    
+    try {
+      const response = await fetch('https://zainchaudhary.pythonanywhere.com/chat/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: 'prompt=' + encodeURIComponent(promptText),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`Failed to fetch. Status: ${response.status}`);
+      }
+      const data = await response.json();
+  
+      setResponse(prev => [...prev, { user: "chatgpt", message: data.reply }]);
+      setError('');
+      setLoading(false);
+    } catch (error) {
+      console.error('Error:', error);
+      setError('Error: ' + error.message);
+      setResponse('');
+    }
+  };
+  
 
-  }
-  const clearChat = () => {
-    setChatLog([]);
-  }
   const changeMode = () => {
     setMode(mode === 'dark' ? 'white' : 'dark');
   }
@@ -52,12 +61,10 @@ const App = () => {
   const handleClick = () => {
     setIsVisible(false);
   };
-
   const handleCombinedSubmit = (e) => {
     handleClick();
     handleSubmit(e);
   };
-
   const handleModeCombined = ()=>{
     changeMode();
     toggleicon();
@@ -72,8 +79,8 @@ const App = () => {
       <div className='icon-div'  onClick={()=>{handleModeCombined()}}>
         {icon}
       </div>
-      {chatLog.length > 0 ?
-        chatLog.map((el, i) => {
+      {response.length > 0 ?
+        response.map((el, i) => {
           return <ChatMessage key={i} message={el} mode={mode} />
         })
         :
@@ -99,14 +106,15 @@ const App = () => {
               <input
                 placeholder='Message ChatGPT...'
                 className={`input-container ${mode === 'dark' ? 'bg-dark' : 'bg-white'}`}
-                value={input}
+                value={promptText}
                 type='text'
-                required
                 disabled={loading}
-                onChange={(e) => { setInput(e.target.value) }}
+                onChange={(e) =>  {setPromptText(e.target.value)} }
               />
               <div className='submit-button' onClick={handleCombinedSubmit}><FontAwesomeIcon icon={faArrowUp} /></div>
-            </form>
+
+              </form>
+              
         </div>
       </section>
     </div>
@@ -116,32 +124,17 @@ const App = () => {
 export default App
 
 const ChatMessage = ({ message, mode }) => {
-  
   return (
-    <div className="chat-log">
-    <span className="avatar"><FaRegUser /> </span> 
-      <div
-        className={`chat-message ${mode === "dark" ? "bg-dark" : "bg-white"}`}
-      >
-      
-        <div className="message">
-        {message.message}</div>
-        
+    <div className={`chat-log ${mode === "dark" ? "bg-dark" : "bg-white"}`}>
+      <span className="avatar"></span> 
+      <div className={message.user === 'chatgpt' ? 'chatGPT' : ''}>
+        {message.user === 'chatgpt' && (
+          <img className='gpt-icon-answer' src={gpticon} alt="User" />
+        )}
       </div>
-      {/*
-  <div className='chat-message-center'>
-    <div className={`avatar ${message.user === 'chatgpt' && 'chatGPT'}`}>
-      {
-        message.user === 'chatgpt' &&
-        <img src={userImage} alt="User Avatar" />
-      }
+      <div className="message">
+        {message.user !== 'chatgpt' && <FaRegUser />} &nbsp; &nbsp; &nbsp; {message.message} 
+      </div>
     </div>
-    <div className='message' >
-      {message.message}
-    </div>
-  </div>
-*/}
-    </div>
-    
   );
-}
+};
