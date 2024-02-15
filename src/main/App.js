@@ -7,6 +7,7 @@ import { faArrowUp } from '@fortawesome/free-solid-svg-icons'
 import { FiMoon } from "react-icons/fi";
 import { MdOutlineWbSunny } from "react-icons/md";
 import { FaRegUser } from "react-icons/fa6";
+import Swal from 'sweetalert2'
 
 
 const App = () => {
@@ -49,20 +50,21 @@ const App = () => {
       setError('Error: ' + error.message);
       setResponse('');
     }
-  };
-  
+};
 
   const changeMode = () => {
     setMode(mode === 'dark' ? 'white' : 'dark');
-  }
+  };
   const toggleicon=()=>{
     setIcon(mode === 'white' ? MdOutlineWbSunny : FiMoon);
-  }
+  };
   const handleClick = () => {
     setIsVisible(false);
   };
+
+
   const handleCombinedSubmit = (e) => {
-    handleClick();
+    handleClick(e);
     handleSubmit(e);
   };
   const handleModeCombined = ()=>{
@@ -74,7 +76,7 @@ const App = () => {
 
   return (
     <Fragment> 
-    <div className='app'>
+    <div className={`app ${mode === 'dark' ? 'bg-dark' : 'bg-white'}`}>
       <section className={`chatbox ${mode === 'dark' ? 'bg-dark' : 'bg-white'}`} >
       <div className='icon-div'  onClick={()=>{handleModeCombined()}}>
         {icon}
@@ -126,16 +128,30 @@ export default App
 const ChatMessage = ({ message, mode }) => {
   return (
     <div className={`chat-log ${mode === "dark" ? "bg-dark" : "bg-white"}`}>
-      <span className="avatar"></span>
-      <div className={message.user === 'chatgpt' ? 'chatGPT' : ''}>
-        {message.user === 'chatgpt' && (
-          <img className='gpt-icon-answer' src={gpticon} alt="User" />
-        )}
-      </div>
-      <div className="user-icon">
-        {message.user !== 'chatgpt' && <span><FaRegUser /></span>} &nbsp; &nbsp;
-      </div>
-      <div className="message">{message.message}</div>
+    <span className="avatar"></span>
+    <div className={message.user === 'chatgpt' ? 'chatGPT' : ''}>
+      {message.user === 'chatgpt' && (
+        <img className='gpt-icon-answer' src={gpticon} alt="User" />
+      )}
     </div>
+    <div className="user-icon">
+      {message.user !== 'chatgpt' && <span><FaRegUser /></span>} &nbsp; &nbsp;
+    </div>
+    <div className="message">
+      {message.user === null || message.message === '' ? (
+        Swal.fire({
+          title: "Ask something",
+          icon: "question",
+          showConfirmButton: false,
+        }) &&
+          setTimeout(() => {
+            window.location.reload();
+          }, 1500)
+      ) && setIsVisible(false) : (
+        message.message
+      )}
+    </div>
+  </div>
+  
   );
 };

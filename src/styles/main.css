@@ -130,6 +130,7 @@
   font-size: 14px;
   padding-bottom: 20px;
   border-radius: 18px;
+  margin-left: 5px;
 }
 
 .input-container:focus{
@@ -199,6 +200,7 @@
 }
 .user-icon{
   margin-left: 5px;
+  margin-top: 1.5px;
 }
 .chat-log {
   display: flex;
