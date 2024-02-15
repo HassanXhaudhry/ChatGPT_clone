@@ -15,7 +15,7 @@ const App = () => {
   const [mode, setMode] = useState('white');
   const [isVisible, setIsVisible] = useState(true);
   const [icon, setIcon]= useState(FiMoon);
-
+  const [selectedQuestion, setSelectedQuestion] = useState('');
   const [promptText, setPromptText] = useState('');
   const [response, setResponse] = useState([]);
   const [error, setError] = useState('');
@@ -48,7 +48,10 @@ const App = () => {
     } catch (error) {
       console.error('Error:', error);
       setError('Error: ' + error.message);
-      setResponse('');
+      setResponse([]);
+    }
+    finally {
+      setLoading(false); // Ensure loading is set to false even in case of an error
     }
 };
 
@@ -63,9 +66,12 @@ const App = () => {
   };
 
 
-  const handleCombinedSubmit = (e) => {
-    handleClick(e);
+  const handleCombinedSubmit = (e, question) => {
+    if (selectedQuestion) {
+      setPromptText(selectedQuestion);
+    }
     handleSubmit(e);
+    handleClick();
   };
   const handleModeCombined = ()=>{
     changeMode();
@@ -92,14 +98,19 @@ const App = () => {
         </div>
       }
   {isVisible &&(
-        <div className="questions">
-        <div class="first-questions-column">
-            <span className={`answerScreen ${mode === 'dark' ? 'bg-dark' : 'bg-white'}`}>Help me pick<p>a gift for my dad who loves fishing</p></span>
-            <span className={`answerScreen ${mode === 'dark' ? 'bg-dark' : 'bg-white'}`}>Tell me a fun fact <p>about the Golden State Warriors</p></span>
-        </div>
+      <div className="questions">
+          <div class="first-questions-column">
+            <span className={`answerScreen ${mode === 'dark' ? 'bg-dark' : 'bg-white'}`} onClick={() => setPromptText('Help me pick a gift for my dad who loves fishing')}>
+            Help me pick<p>a gift for my dad who loves fishing</p>
+            </span>
+            <span className={`answerScreen ${mode === 'dark' ? 'bg-dark' : 'bg-white'}`} onClick={() => setPromptText('Tell me a fun fact about the Golden State Warriors')}>
+            Tell me a fun fact<p>about the Golden State Warriors</p></span>
+          </div>
         <div className="second-questions-column">
-            <span className={`answerScreen ${mode === 'dark' ? 'bg-dark' : 'bg-white'}`}>Write a thank you note <p>to a guest speaker for my class</p></span>
-            <span className={`answerScreen ${mode === 'dark' ? 'bg-dark' : 'bg-white'}`}>Show me code snippet <p>of a website sticky header</p></span>
+            <span className={`answerScreen ${mode === 'dark' ? 'bg-dark' : 'bg-white'}`} onClick={() => setPromptText('Write a thank you note to a guest speaker for my class')}>
+            Write a thank you note <p>to a guest speaker for my class</p></span>
+            <span className={`answerScreen ${mode === 'dark' ? 'bg-dark' : 'bg-white'}`} onClick={() => setPromptText('Write a course overview on the psychology behind decison-making')}>
+            Write a course overview<p>on the psychology behind decison-making</p></span>
         </div>
     </div>
   )}
@@ -142,11 +153,15 @@ const ChatMessage = ({ message, mode }) => {
         Swal.fire({
           title: "Ask something",
           icon: "question",
-          showConfirmButton: false,
-        }) &&
-          setTimeout(() => {
+          showConfirmButton: true,
+          confirmButtonText: 'Ok', // Text for the confirm button
+        }).then((result) => {
+          if (result.isConfirmed) {
             window.location.reload();
-          }, 1500)
+          } else {
+            console.log('User cancelled!');
+          }
+        }) 
       ) && setIsVisible(false) : (
         message.message
       )}
