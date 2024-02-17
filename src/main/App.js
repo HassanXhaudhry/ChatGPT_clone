@@ -68,7 +68,7 @@ const App = () => {
   };
 
 
-  const handleCombinedSubmit = (e, question) => {
+  const handleCombinedSubmit = (e) => {
     if (selectedQuestion) {
       setPromptText(selectedQuestion);
     }
@@ -79,8 +79,6 @@ const App = () => {
     changeMode();
     toggleicon();
   }
-
- 
 
   return (
     <Fragment> 
@@ -166,9 +164,7 @@ const ChatMessage = ({ message, mode }) => {
         }) 
       ) && setIsVisible(false) : <ReactMarkdown>{message.message}</ReactMarkdown> 
       }
-      
     </div>
   </div>
-  
   );
 };
