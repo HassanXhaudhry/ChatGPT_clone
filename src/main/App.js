@@ -8,6 +8,8 @@ import { FiMoon } from "react-icons/fi";
 import { MdOutlineWbSunny } from "react-icons/md";
 import { FaRegUser } from "react-icons/fa6";
 import Swal from 'sweetalert2'
+import ClipLoader from "react-spinners/ClipLoader";
+import ReactMarkdown from 'react-markdown';
 
 
 const App = () => {
@@ -44,14 +46,14 @@ const App = () => {
   
       setResponse(prev => [...prev, { user: "chatgpt", message: data.reply }]);
       setError('');
-      setLoading(false);
+      setLoading(true);
     } catch (error) {
       console.error('Error:', error);
       setError('Error: ' + error.message);
       setResponse([]);
     }
     finally {
-      setLoading(false); // Ensure loading is set to false even in case of an error
+      setLoading(false);
     }
 };
 
@@ -154,7 +156,7 @@ const ChatMessage = ({ message, mode }) => {
           title: "Ask something",
           icon: "question",
           showConfirmButton: true,
-          confirmButtonText: 'Ok', // Text for the confirm button
+          confirmButtonText: 'Ok', 
         }).then((result) => {
           if (result.isConfirmed) {
             window.location.reload();
@@ -162,9 +164,9 @@ const ChatMessage = ({ message, mode }) => {
             console.log('User cancelled!');
           }
         }) 
-      ) && setIsVisible(false) : (
-        message.message
-      )}
+      ) && setIsVisible(false) : <ReactMarkdown>{message.message}</ReactMarkdown> 
+      }
+      
     </div>
   </div>
   
