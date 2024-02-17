@@ -204,8 +204,10 @@
   margin-right: 5px;
 }
 .user-icon{
-  margin-left: 5px;
-  margin-top: 1.5px;
+  margin-right: 15px;
+}
+.FaUser{
+  width: 20px;
 }
 .chat-log {
   display: flex;
@@ -223,7 +225,8 @@
 
 .chatGPT{
     border-radius: 2px;
-    padding: 12px!important;
+    margin-top: 13px;
+    margin-left: 9px;
 }
 .bg-white{
   color: #222222;

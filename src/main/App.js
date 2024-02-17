@@ -148,7 +148,7 @@ const ChatMessage = ({ message, mode }) => {
       )}
     </div>
     <div className="user-icon">
-      {message.user !== 'chatgpt' && <span><FaRegUser /></span>} &nbsp; &nbsp;
+      {message.user !== 'chatgpt' && <span><FaRegUser className='FaUser' /></span>} &nbsp; &nbsp;
     </div>
     <div className="message">
       {message.user === null || message.message === '' ? (
