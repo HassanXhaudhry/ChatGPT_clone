@@ -41,6 +41,8 @@
     align-items: center;
     position: relative;
     height: 85.6vh;
+    margin-left: 10px;
+    margin-right: 12px;
 }
 
 .chat-input {
