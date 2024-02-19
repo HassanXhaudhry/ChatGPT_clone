@@ -8,9 +8,8 @@ import { FiMoon } from "react-icons/fi";
 import { MdOutlineWbSunny } from "react-icons/md";
 import { FaRegUser } from "react-icons/fa6";
 import Swal from 'sweetalert2'
-import ClipLoader from "react-spinners/ClipLoader";
 import ReactMarkdown from 'react-markdown';
-
+import { TailSpin } from 'react-loader-spinner';
 
 const App = () => {
 
@@ -89,7 +88,7 @@ const App = () => {
       </div>
       {response.length > 0 ?
         response.map((el, i) => {
-          return <ChatMessage key={i} message={el} mode={mode} />
+          return <ChatMessage key={i} message={el} mode={mode} loading={loading}/>
         })
         :
         <div className='start-conversation' >
@@ -136,7 +135,7 @@ const App = () => {
 }
 export default App
 
-const ChatMessage = ({ message, mode }) => {
+const ChatMessage = ({ message, mode, loading }) => {
   return (
     <div className={`chat-log ${mode === "dark" ? "bg-dark" : "bg-white"}`}>
     <span className="avatar"></span>
@@ -150,21 +149,38 @@ const ChatMessage = ({ message, mode }) => {
     </div>
     <div className="message">
       {message.user === null || message.message === '' ? (
-        Swal.fire({
-          title: "Ask something",
-          icon: "question",
-          showConfirmButton: true,
-          confirmButtonText: 'Ok', 
-        }).then((result) => {
-          if (result.isConfirmed) {
-            window.location.reload();
-          } else {
-            console.log('User cancelled!');
-          }
-        }) 
-      ) && setIsVisible(false) : <ReactMarkdown>{message.message}</ReactMarkdown> 
-      }
+        (() => {
+          Swal.fire({
+            title: "Ask something",
+            icon: "question",
+            showConfirmButton: true,
+            confirmButtonText: 'Ok',
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.reload();
+            } else {
+              console.log('User cancelled!');
+            }
+          });
+          setIsVisible(false); 
+        })()
+      ) : (
+        loading ? (
+          <div className='loader-container'>
+            <TailSpin
+              type="TailSpin"
+              visible={true}
+              height="50"
+              width="50"
+              color= "#84888f"
+            />
+          </div>
+        ) : (
+          <ReactMarkdown>{message.message}</ReactMarkdown>
+        )
+      )}
     </div>
   </div>
+  
   );
 };
