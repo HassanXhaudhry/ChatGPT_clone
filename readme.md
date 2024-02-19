@@ -1,1 +1,1 @@
-ChatGPT frontend clone.
+ChatGPT clone.
